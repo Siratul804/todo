@@ -6,6 +6,7 @@ import List from "./List";
 const Form = () => {
   const [newTodo, setNewTodo] = useState("");
   const [todos, setTodos] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const inputRef = useRef();
   const noteRef = useRef({});
@@ -74,7 +75,6 @@ const Form = () => {
   const loadTasks = () => {
     let loadedTasks = localStorage.getItem("todo");
     let todos = JSON.parse(loadedTasks);
-
     if (todos) {
       setTodos(todos);
     }
@@ -82,7 +82,7 @@ const Form = () => {
 
   useEffect(() => {
     loadTasks();
-  }, [todos]);
+  }, []);
 
   return (
     <div className="Form">
@@ -107,6 +107,8 @@ const Form = () => {
           saveTodo={saveTodo}
           noteRef={noteRef}
           preventSubmit={preventSubmit}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
         />
       </form>
     </div>
