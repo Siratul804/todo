@@ -5,23 +5,7 @@ import List from "./List";
 
 const Form = () => {
   const [newTodo, setNewTodo] = useState("");
-  const [todos, setTodos] = useState([
-    {
-      text: "Learn about React",
-      isCompleted: false,
-      isEditing: false,
-    },
-    {
-      text: "Meet friend for lunch",
-      isCompleted: false,
-      isEditing: false,
-    },
-    {
-      text: "Build really cool todo app",
-      isCompleted: false,
-      isEditing: false,
-    },
-  ]);
+  const [todos, setTodos] = useState([]);
 
   const inputRef = useRef();
   const noteRef = useRef({});
@@ -45,6 +29,7 @@ const Form = () => {
       const newTodos = [...todos, { text }];
       setNewTodo("");
       setTodos(newTodos);
+      StoreTodo([...newTodos]);
     } else {
       console.log("text", text);
       setInputEmpty(true);
@@ -55,12 +40,14 @@ const Form = () => {
     const newArr = [...todos];
     newArr.splice(inx, 1);
     setTodos(newArr);
+    StoreTodo([...newArr]);
   };
 
   const editTodo = (inx) => {
     const newTodos = [...todos];
     newTodos[inx].isEditing = !newTodos[inx].isEditing;
     setTodos(newTodos);
+    StoreTodo([...newTodos]);
   };
 
   const saveTodo = (inx) => {
@@ -68,6 +55,7 @@ const Form = () => {
     newTodos[inx].isEditing = !newTodos[inx].isEditing;
     newTodos[inx].text = noteRef.current[inx].value;
     setTodos(newTodos);
+    StoreTodo([...newTodos]);
   };
 
   const clearInput = () => {
@@ -79,11 +67,22 @@ const Form = () => {
     setNewTodo(todo);
   };
 
-  useEffect(() => {}, [todos]);
+  const StoreTodo = (todo) => {
+    localStorage.setItem("todo", JSON.stringify(todo));
+  };
 
-  // function saveTasks(todo) {
-  //   localStorage.setItem("tasks", JSON.stringify(todo));
-  // }
+  const loadTasks = () => {
+    let loadedTasks = localStorage.getItem("todo");
+    let todos = JSON.parse(loadedTasks);
+
+    if (todos) {
+      setTodos(todos);
+    }
+  };
+
+  useEffect(() => {
+    loadTasks();
+  }, [todos]);
 
   return (
     <div className="Form">
