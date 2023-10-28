@@ -1,13 +1,6 @@
 import React from "react";
 
-const FormInput = ({
-  todo,
-  setTodo,
-  clearInput,
-  inputRef,
-  isInputEmpty,
-  preventSubmit,
-}) => {
+const FormInput = ({ todo, setTodo, clearInput, inputRef }) => {
   return (
     <div>
       <div className="py-4 flex justify-center ">
@@ -17,23 +10,12 @@ const FormInput = ({
           onChange={(e) => setTodo(e.target.value)}
           onFocus={clearInput}
           ref={inputRef}
-          onKeyPress={preventSubmit}
           placeholder="What's need to be done?"
-          className="input input-bordered input-secondary w-full max-w-xs"
+          className="input border-none input-ghost w-[220px] sm:w-full max-w-xs bg-slate-100 rounded-full "
         />
-        <div className="px-1">
-          {!isInputEmpty ? (
-            <></>
-          ) : (
-            <>
-              <b>Task can't be empty</b>
-            </>
-          )}
-        </div>
         <button
           type="submit"
-          className="btn btn-outline btn-error"
-          onKeyPress={preventSubmit}
+          className="bg-[#ff4d6d] hover:bg-[#5a1d28] text-white font-bold py-2 px-4 rounded-full "
         >
           create
         </button>

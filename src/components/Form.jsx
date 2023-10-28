@@ -10,19 +10,17 @@ const Form = () => {
 
   const inputRef = useRef();
   const noteRef = useRef({});
-  const [isInputEmpty, setInputEmpty] = useState(false);
+
+  const handleCopy = (text) => {
+    navigator.clipboard.writeText(text);
+    alert("added to clipboard");
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     addTodo(newTodo);
     clearInput();
     inputRef.current.focus();
-  };
-
-  const preventSubmit = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-    }
   };
 
   const addTodo = (text) => {
@@ -33,7 +31,6 @@ const Form = () => {
       StoreTodo([...newTodos]);
     } else {
       console.log("text", text);
-      setInputEmpty(true);
     }
   };
 
@@ -42,13 +39,6 @@ const Form = () => {
     newArr.splice(inx, 1);
     setTodos(newArr);
     StoreTodo([...newArr]);
-  };
-
-  const editTodo = (inx) => {
-    const newTodos = [...todos];
-    newTodos[inx].isEditing = !newTodos[inx].isEditing;
-    setTodos(newTodos);
-    StoreTodo([...newTodos]);
   };
 
   const saveTodo = (inx) => {
@@ -64,7 +54,6 @@ const Form = () => {
   };
 
   const setTodo = (todo) => {
-    setInputEmpty(false);
     setNewTodo(todo);
   };
 
@@ -85,30 +74,27 @@ const Form = () => {
   }, []);
 
   return (
-    <div className="Form">
-      <h1 className="text-[50px] font-bold flex justify-center py-2 text-[red]  ">
-        Todo List
+    <div className="Form bg-white h-[60vh] rounded-lg w-[340px] sm:w-[450px] sm:h-[80vh] drop-shadow-lg ">
+      <h1 className="text-[25px] font-bold  text-[black] pt-5 pl-6 ">
+        To-do List 📑
       </h1>
-      <br />
+
       <form onSubmit={handleSubmit} className="form">
         <FormInput
           todo={newTodo}
           setTodo={setTodo}
           clearInput={clearInput}
           inputRef={inputRef}
-          idInputEmpty={isInputEmpty}
-          preventSubmit={preventSubmit}
         />
 
         <List
           todos={todos}
-          editTodo={editTodo}
           deleteTodo={removeTodo}
           saveTodo={saveTodo}
           noteRef={noteRef}
-          preventSubmit={preventSubmit}
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
+          handleCopy={handleCopy}
         />
       </form>
     </div>
