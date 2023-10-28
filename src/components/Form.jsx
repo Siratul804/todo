@@ -47,6 +47,7 @@ const Form = () => {
     newTodos[inx].text = noteRef.current[inx].value;
     setTodos(newTodos);
     StoreTodo([...newTodos]);
+    alert("to-do save");
   };
 
   const clearInput = () => {
