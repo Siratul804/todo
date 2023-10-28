@@ -57,9 +57,7 @@ const List = ({
               </div>
               <div className="todo_btn">
                 <button
-                  onClick={() =>
-                    document.getElementById("my_modal_3").showModal()
-                  }
+                  onClick={() => document.getElementById(inx).showModal()}
                 >
                   <CiEdit size={20} color="green" />
                 </button>
@@ -68,7 +66,7 @@ const List = ({
                 </button>
               </div>
 
-              <dialog id="my_modal_3" className="modal">
+              <dialog id={inx} className="modal">
                 <div className="modal-box">
                   <form method="dialog">
                     <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
@@ -87,8 +85,6 @@ const List = ({
                           id="task"
                           className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
                           type="text"
-                          placeholder="search to-do"
-                          aria-label="Full name"
                         />
                       </div>
                     </div>

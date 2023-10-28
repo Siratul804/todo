@@ -1,8 +1,10 @@
+/* import From component */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 
+/* Define Parent Font */
 * {
     font-family: sans-serif;
 }
