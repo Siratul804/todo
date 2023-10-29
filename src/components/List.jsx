@@ -29,6 +29,7 @@ const List = ({
           />
         </div>
       </div>
+      {/* ...................... */}
 
       {todos
         .filter((val) => {
@@ -50,7 +51,7 @@ const List = ({
                   onClick={() => {
                     handleCopy(todo.text);
                   }}
-                  className="px-2"
+                  className="px-2 hover:scale-150 transition ease-in-out delay-50 duration-300 "
                 >
                   <GoCopy size={20} color="gray" />
                 </button>
@@ -58,10 +59,14 @@ const List = ({
               <div className="todo_btn">
                 <button
                   onClick={() => document.getElementById(inx).showModal()}
+                  className=" pr-2 hover:scale-150 transition ease-in-out delay-50 duration-300"
                 >
                   <CiEdit size={20} color="green" />
                 </button>
-                <button onClick={() => deleteTodo(inx)} className="pl-4">
+                <button
+                  onClick={() => deleteTodo(inx)}
+                  className="pl-2 hover:-translate-x-0.5 hover:scale-150 transition ease-in-out delay-50 duration-300"
+                >
                   <AiOutlineDelete size={20} color="red" />
                 </button>
               </div>
@@ -89,7 +94,10 @@ const List = ({
                       </div>
                     </div>
 
-                    <button onClick={() => saveTodo(inx)}>
+                    <button
+                      onClick={() => saveTodo(inx)}
+                      className=" hover:scale-150 transition ease-in-out delay-50 duration-300"
+                    >
                       <CiSaveDown2 size={30} color="blue" />
                     </button>
                   </div>
